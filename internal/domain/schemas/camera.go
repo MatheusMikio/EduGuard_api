@@ -13,11 +13,11 @@ const (
 type Camera struct {
 	gorm.Model
 	Label     string       `gorm:"not null"`
-	Location  string       `gorm:"not null;size=100"`
+	Location  string       `gorm:"not null;size:100"`
 	StreamURL string       `gorm:"not null"`
-	Status    CameraStatus `gorm:"not null;default:'ONLINE'"`
+	Status    CameraStatus `gorm:"type:camera_status;not null;default:'ONLINE'"`
 	SchoolID  uint         `gorm:"not null"`
 	School    *School      `gorm:"foreignKey:SchoolID"`
-	RoomID    uint         `gorm:"not null"`
+	RoomID    *uint        
 	Room      *Room        `gorm:"foreignKey:RoomID"`
 }
