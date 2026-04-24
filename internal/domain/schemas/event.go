@@ -19,7 +19,7 @@ type EventStatus string
 
 const (
 	EventStatusPending   EventStatus = "PENDENTE"
-	EventStatusReviewd   EventStatus = "EM REVISÃO"
+	EventStatusReviewed   EventStatus = "EM REVISÃO"
 	EventStatusCompleted EventStatus = "CONCLUIDO"
 )
 
@@ -29,13 +29,13 @@ type Event struct {
 	School       *School     `gorm:"foreignKey:SchoolID"`
 	CameraID     uint        `gorm:"not null"`
 	Camera       *Camera     `gorm:"foreignKey:CameraID"`
-	Type         EventType   `gorm:"not null"`
+	Type         EventType   `gorm:"type:event_type;not null"`
 	RiskScore    float64     `gorm:"not null"`
-	Status       EventStatus `gorm:"not null;default:'PENDENTE'"`
+	Status       EventStatus `gorm:"type:event_status;not null;default:'PENDENTE'"`
 	StartedAt    time.Time   `gorm:"not null"`
 	EndedAt      time.Time   `gorm:"not null"`
 	VideoClipURL string      `gorm:"not null;type:text"`
-	ReviewedByID uint        `gorm:"not null"`
+	ReviewedByID *uint
 	ReviewedBy   *User       `gorm:"foreignKey:ReviewedByID"`
 	ReviewedAt   *time.Time
 	Notes        *string
