@@ -7,7 +7,7 @@ import (
 )
 
 type ICameraRepository interface {
-	base.IBaseRepository[schemas.Camera]
+	base.ICrudRepository[schemas.Camera]
 }
 
 type CameraRepository struct {
