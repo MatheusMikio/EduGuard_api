@@ -3,6 +3,8 @@ package schemas
 import (
 	"time"
 
+	"github.com/MatheusMikio/eduGuard_api/internal/domain/dtos/event"
+	"github.com/MatheusMikio/eduGuard_api/internal/domain/models"
 	"gorm.io/gorm"
 )
 
@@ -19,7 +21,7 @@ type EventStatus string
 
 const (
 	EventStatusPending   EventStatus = "PENDENTE"
-	EventStatusReviewed   EventStatus = "EM REVISÃO"
+	EventStatusReviewed  EventStatus = "EM REVISÃO"
 	EventStatusCompleted EventStatus = "CONCLUIDO"
 )
 
@@ -36,7 +38,18 @@ type Event struct {
 	EndedAt      time.Time   `gorm:"not null"`
 	VideoClipURL string      `gorm:"not null;type:text"`
 	ReviewedByID *uint
-	ReviewedBy   *User       `gorm:"foreignKey:ReviewedByID"`
+	ReviewedBy   *User `gorm:"foreignKey:ReviewedByID"`
 	ReviewedAt   *time.Time
 	Notes        *string
+}
+
+func NewEvent(r event.Request) (Event, []*models.ErrorMessage) {
+	if err := validateEvent(r); err != nil {
+		return Event{}, err
+	}
+	return Event{}, nil
+}
+
+func validateEvent(request event.Request) []*models.ErrorMessage {
+	return []*models.ErrorMessage{}
 }

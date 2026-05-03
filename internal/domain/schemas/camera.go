@@ -1,6 +1,10 @@
 package schemas
 
-import "gorm.io/gorm"
+import (
+	"github.com/MatheusMikio/eduGuard_api/internal/domain/dtos/camera"
+	"github.com/MatheusMikio/eduGuard_api/internal/domain/models"
+	"gorm.io/gorm"
+)
 
 type CameraStatus string
 
@@ -18,6 +22,17 @@ type Camera struct {
 	Status    CameraStatus `gorm:"type:camera_status;not null;default:'ONLINE'"`
 	SchoolID  uint         `gorm:"not null"`
 	School    *School      `gorm:"foreignKey:SchoolID"`
-	RoomID    *uint        
-	Room      *Room        `gorm:"foreignKey:RoomID"`
+	RoomID    *uint
+	Room      *Room `gorm:"foreignKey:RoomID"`
+}
+
+func NewCamera(r camera.Request) (Camera, []*models.ErrorMessage) {
+	if errors := validateCamera(r); errors != nil {
+		return Camera{}, errors
+	}
+	return Camera{}, nil
+}
+
+func validateCamera(request camera.Request) []*models.ErrorMessage {
+	return []*models.ErrorMessage{}
 }

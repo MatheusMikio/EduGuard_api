@@ -6,9 +6,9 @@ import (
 )
 
 type ICrudService[TRequest any, TUpdate any, TResponse any] interface {
-	GetAllAdmin(page uint64, size uint64) ([]*TResponse, models.ErrorMessage)
-	GetAll(page uint64, size uint64, schoolId uint) ([]*TResponse, models.ErrorMessage)
-	GetById(id uint) (*TResponse, models.ErrorMessage)
+	GetAllAdmin(page uint64, size uint64) ([]*TResponse, *models.ErrorMessage)
+	GetAll(page uint64, size uint64, schoolId uint) ([]*TResponse, *models.ErrorMessage)
+	GetById(id uint) (*TResponse, *models.ErrorMessage)
 	Create(entity *TRequest) []*models.ErrorMessage
 	Update(entity *TUpdate) []*models.ErrorMessage
 	Delete(id uint) *models.Address
@@ -30,15 +30,15 @@ func NewCrudService[TEntity any, TRequest any, TUpdate any, TResponse any](
 	}
 }
 
-func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetAllAdmin(page uint64, size uint64) ([]*TResponse, models.ErrorMessage) {
+func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetAllAdmin(page uint64, size uint64) ([]*TResponse, *models.ErrorMessage) {
 	panic("unimplemented")
 }
 
-func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetAll(page uint64, size uint64, schoolId uint) ([]*TResponse, models.ErrorMessage) {
+func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetAll(page uint64, size uint64, schoolId uint) ([]*TResponse, *models.ErrorMessage) {
 	panic("unimplemented")
 }
 
-func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetById(id uint) (*TResponse, models.ErrorMessage) {
+func (cs *CrudService[TEntity, TRequest, TUpdate, TResponse]) GetById(id uint) (*TResponse, *models.ErrorMessage) {
 	panic("unimplemented")
 }
 
